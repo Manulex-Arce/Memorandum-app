@@ -26,13 +26,16 @@ public class RecordatorioDao_Impl(
   init {
     this.__db = __db
     this.__insertAdapterOfRecordatorio = object : EntityInsertAdapter<Recordatorio>() {
-      protected override fun createQuery(): String = "INSERT OR ABORT INTO `recordatorios` (`id`,`mensaje`,`hora`,`minuto`) VALUES (nullif(?, 0),?,?,?)"
+      protected override fun createQuery(): String = "INSERT OR ABORT INTO `recordatorios` (`id`,`mensaje`,`anio`,`mes`,`dia`,`hora`,`minuto`) VALUES (nullif(?, 0),?,?,?,?,?,?)"
 
       protected override fun bind(statement: SQLiteStatement, entity: Recordatorio) {
         statement.bindLong(1, entity.id)
         statement.bindText(2, entity.mensaje)
-        statement.bindLong(3, entity.hora.toLong())
-        statement.bindLong(4, entity.minuto.toLong())
+        statement.bindLong(3, entity.anio.toLong())
+        statement.bindLong(4, entity.mes.toLong())
+        statement.bindLong(5, entity.dia.toLong())
+        statement.bindLong(6, entity.hora.toLong())
+        statement.bindLong(7, entity.minuto.toLong())
       }
     }
   }
@@ -49,6 +52,9 @@ public class RecordatorioDao_Impl(
       try {
         val _columnIndexOfId: Int = getColumnIndexOrThrow(_stmt, "id")
         val _columnIndexOfMensaje: Int = getColumnIndexOrThrow(_stmt, "mensaje")
+        val _columnIndexOfAnio: Int = getColumnIndexOrThrow(_stmt, "anio")
+        val _columnIndexOfMes: Int = getColumnIndexOrThrow(_stmt, "mes")
+        val _columnIndexOfDia: Int = getColumnIndexOrThrow(_stmt, "dia")
         val _columnIndexOfHora: Int = getColumnIndexOrThrow(_stmt, "hora")
         val _columnIndexOfMinuto: Int = getColumnIndexOrThrow(_stmt, "minuto")
         val _result: MutableList<Recordatorio> = mutableListOf()
@@ -58,11 +64,17 @@ public class RecordatorioDao_Impl(
           _tmpId = _stmt.getLong(_columnIndexOfId)
           val _tmpMensaje: String
           _tmpMensaje = _stmt.getText(_columnIndexOfMensaje)
+          val _tmpAnio: Int
+          _tmpAnio = _stmt.getLong(_columnIndexOfAnio).toInt()
+          val _tmpMes: Int
+          _tmpMes = _stmt.getLong(_columnIndexOfMes).toInt()
+          val _tmpDia: Int
+          _tmpDia = _stmt.getLong(_columnIndexOfDia).toInt()
           val _tmpHora: Int
           _tmpHora = _stmt.getLong(_columnIndexOfHora).toInt()
           val _tmpMinuto: Int
           _tmpMinuto = _stmt.getLong(_columnIndexOfMinuto).toInt()
-          _item = Recordatorio(_tmpId,_tmpMensaje,_tmpHora,_tmpMinuto)
+          _item = Recordatorio(_tmpId,_tmpMensaje,_tmpAnio,_tmpMes,_tmpDia,_tmpHora,_tmpMinuto)
           _result.add(_item)
         }
         _result

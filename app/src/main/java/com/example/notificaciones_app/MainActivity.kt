@@ -9,13 +9,19 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 
 
@@ -26,6 +32,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnElegirAudio: Button
     private lateinit var btnQuitarVideo: Button
     private lateinit var btnQuitarAudio: Button
+    private lateinit var btnElegirFecha: Button
+    private lateinit var tvFechaSeleccionada: TextView
+
+    private var anioSeleccionado: Int = Calendar.getInstance().get(Calendar.YEAR)
+    private var mesSeleccionado: Int = Calendar.getInstance().get(Calendar.MONTH)
+    private var diaSeleccionado: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,10 +89,18 @@ class MainActivity : AppCompatActivity() {
         // 1. Inicializar la base de datos
         database = AppDatabase.obtenerBaseDatos(this)
 
-        // 2. Vincular las vistas del XML con variables en Kotlin
+            // 2. Vincular las vistas del XML con variables en Kotlin
         val etMensaje = findViewById<EditText>(R.id.etMensaje)
         val timePicker = findViewById<TimePicker>(R.id.timePicker)
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
+        btnElegirFecha = findViewById(R.id.btnElegirFecha)
+        tvFechaSeleccionada = findViewById(R.id.tvFechaSeleccionada)
+
+        actualizarTextoFecha()
+
+        btnElegirFecha.setOnClickListener {
+            mostrarSelectorFecha()
+        }
 
         // Vincular el botón del historial (¡Asegúrate de agregar este botón en tu activity_main.xml!)
         val btnVerHistorial = findViewById<Button>(R.id.btnVerHistorial)
@@ -102,35 +122,60 @@ class MainActivity : AppCompatActivity() {
 
             if (mensaje.isEmpty()) {
                 Toast.makeText(this, "Por favor escribe un mensaje", Toast.LENGTH_SHORT).show()
-            } else {
-                // 4. Guardar en la base de datos usando una corrutina (hilo secundario)
-                lifecycleScope.launch {
-                    val nuevoRecordatorio = Recordatorio(
-                        mensaje = mensaje,
-                        hora = hora,
-                        minuto = minuto
+                return@setOnClickListener
+            }
+
+            val tiempoEnMilisegundos = calcularMilisegundos(
+                anioSeleccionado,
+                mesSeleccionado,
+                diaSeleccionado,
+                hora,
+                minuto
+            )
+
+            if (tiempoEnMilisegundos <= System.currentTimeMillis()) {
+                Toast.makeText(
+                    this,
+                    "Elige una fecha y hora futuras",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            // 4. Guardar en la base de datos usando una corrutina (hilo secundario)
+            lifecycleScope.launch {
+                val nuevoRecordatorio = Recordatorio(
+                    mensaje = mensaje,
+                    anio = anioSeleccionado,
+                    mes = mesSeleccionado,
+                    dia = diaSeleccionado,
+                    hora = hora,
+                    minuto = minuto
+                )
+
+                // Insertar mediante el DAO (Room nos devuelve el ID generado)
+                val idGenerado = database.recordatorioDao().insertar(nuevoRecordatorio)
+
+                // Programar la alarma en el sistema operativo
+                programarAlarmaSistema(idGenerado, tiempoEnMilisegundos, mensaje)
+
+                // Mostrar mensaje de éxito en la interfaz principal
+                runOnUiThread {
+                    val fechaTexto = String.format(
+                        Locale.getDefault(),
+                        "%02d/%02d/%04d",
+                        diaSeleccionado,
+                        mesSeleccionado + 1,
+                        anioSeleccionado
                     )
+                    Toast.makeText(
+                        this@MainActivity,
+                        "¡Guardado! '$mensaje' el $fechaTexto a las ${String.format("%02d:%02d", hora, minuto)}",
+                        Toast.LENGTH_LONG
+                    ).show()
 
-                    // Insertar mediante el DAO (Room nos devuelve el ID generado)
-                    val idGenerado = database.recordatorioDao().insertar(nuevoRecordatorio)
-
-                    // Calcular los milisegundos exactos para la alarma
-                    val tiempoEnMilisegundos = calcularMilisegundos(hora, minuto)
-
-                    // Programar la alarma en el sistema operativo
-                    programarAlarmaSistema(idGenerado, tiempoEnMilisegundos, mensaje)
-
-                    // Mostrar mensaje de éxito en la interfaz principal
-                    runOnUiThread {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "¡Guardado y programado! '$mensaje' a las ${String.format("%02d:%02d", hora, minuto)}",
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                        // Limpiar el campo de texto
-                        etMensaje.text.clear()
-                    }
+                    // Limpiar el campo de texto
+                    etMensaje.text.clear()
                 }
             }
         }
@@ -195,20 +240,54 @@ class MainActivity : AppCompatActivity() {
         btnQuitarAudio.isEnabled = hayAudio
     }
 
-    // Función auxiliar para calcular el tiempo en milisegundos de la hora seleccionada
-    private fun calcularMilisegundos(hora: Int, minuto: Int): Long {
+    private fun mostrarSelectorFecha() {
+    val datePicker = MaterialDatePicker.Builder.datePicker()
+        .setTitleText("Selecciona la fecha")
+        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+        .build()
+
+    datePicker.addOnPositiveButtonClickListener { utcMillis ->
+        val calendario = Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+            timeInMillis = utcMillis
+        }
+        anioSeleccionado = calendario.get(Calendar.YEAR)
+        mesSeleccionado = calendario.get(Calendar.MONTH)
+        diaSeleccionado = calendario.get(Calendar.DAY_OF_MONTH)
+        actualizarTextoFecha()
+    }
+
+    datePicker.show(supportFragmentManager, "DATE_PICKER")
+    }
+
+    private fun actualizarTextoFecha() {
+        val fechaTexto = String.format(
+            Locale.getDefault(),
+            "%02d/%02d/%04d",
+            diaSeleccionado,
+            mesSeleccionado + 1,
+            anioSeleccionado
+        )
+        tvFechaSeleccionada.text = "Fecha: $fechaTexto"
+        btnElegirFecha.text = "Cambiar fecha"
+    }
+
+    // Función auxiliar para calcular el tiempo en milisegundos de fecha + hora
+    private fun calcularMilisegundos(
+        anio: Int,
+        mes: Int,
+        dia: Int,
+        hora: Int,
+        minuto: Int
+    ): Long {
         val calendar = Calendar.getInstance().apply {
+            set(Calendar.YEAR, anio)
+            set(Calendar.MONTH, mes)
+            set(Calendar.DAY_OF_MONTH, dia)
             set(Calendar.HOUR_OF_DAY, hora)
             set(Calendar.MINUTE, minuto)
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
         }
-
-        // Si la hora elegida ya pasó hoy, programarla para mañana automáticamente
-        if (calendar.timeInMillis <= System.currentTimeMillis()) {
-            calendar.add(Calendar.DAY_OF_YEAR, 1)
-        }
-
         return calendar.timeInMillis
     }
 

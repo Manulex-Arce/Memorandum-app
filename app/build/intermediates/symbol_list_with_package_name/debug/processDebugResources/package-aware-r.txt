@@ -3177,6 +3177,7 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id btnElegirAudio
+id btnElegirFecha
 id btnElegirVideo
 id btnGuardar
 id btnPermisoOverlay
@@ -3561,6 +3562,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvFechaSeleccionada
 id tvHoraItem
 id tvMensajeItem
 id unchecked

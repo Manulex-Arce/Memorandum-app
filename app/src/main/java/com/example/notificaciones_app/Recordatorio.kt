@@ -8,6 +8,9 @@ data class Recordatorio(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val mensaje: String,
+    val anio: Int,
+    val mes: Int,
+    val dia: Int,
     val hora: Int,
     val minuto: Int
 )

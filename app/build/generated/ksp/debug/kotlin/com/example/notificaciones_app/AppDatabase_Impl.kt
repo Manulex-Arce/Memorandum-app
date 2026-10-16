@@ -32,11 +32,11 @@ public class AppDatabase_Impl : AppDatabase() {
   }
 
   protected override fun createOpenDelegate(): RoomOpenDelegate {
-    val _openDelegate: RoomOpenDelegate = object : RoomOpenDelegate(1, "56ef4aae0d757d48fbb77deafa977679", "06b991f0c87c7860f1a2e5535847f213") {
+    val _openDelegate: RoomOpenDelegate = object : RoomOpenDelegate(2, "3058b3d202162be9fa74df1e61d53add", "f9c38b5e209969d0efe1943a0ed8599a") {
       public override fun createAllTables(connection: SQLiteConnection) {
-        connection.execSQL("CREATE TABLE IF NOT EXISTS `recordatorios` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mensaje` TEXT NOT NULL, `hora` INTEGER NOT NULL, `minuto` INTEGER NOT NULL)")
+        connection.execSQL("CREATE TABLE IF NOT EXISTS `recordatorios` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mensaje` TEXT NOT NULL, `anio` INTEGER NOT NULL, `mes` INTEGER NOT NULL, `dia` INTEGER NOT NULL, `hora` INTEGER NOT NULL, `minuto` INTEGER NOT NULL)")
         connection.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)")
-        connection.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '56ef4aae0d757d48fbb77deafa977679')")
+        connection.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3058b3d202162be9fa74df1e61d53add')")
       }
 
       public override fun dropAllTables(connection: SQLiteConnection) {
@@ -61,6 +61,9 @@ public class AppDatabase_Impl : AppDatabase() {
         val _columnsRecordatorios: MutableMap<String, TableInfo.Column> = mutableMapOf()
         _columnsRecordatorios.put("id", TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY))
         _columnsRecordatorios.put("mensaje", TableInfo.Column("mensaje", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
+        _columnsRecordatorios.put("anio", TableInfo.Column("anio", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
+        _columnsRecordatorios.put("mes", TableInfo.Column("mes", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
+        _columnsRecordatorios.put("dia", TableInfo.Column("dia", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
         _columnsRecordatorios.put("hora", TableInfo.Column("hora", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
         _columnsRecordatorios.put("minuto", TableInfo.Column("minuto", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY))
         val _foreignKeysRecordatorios: MutableSet<TableInfo.ForeignKey> = mutableSetOf()

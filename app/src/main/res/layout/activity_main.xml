@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MemoriandumApp-V1.3"
+        android:text="MemoriandumApp-V1.6"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
@@ -40,10 +40,32 @@
             android:inputType="textCapSentences"
             android:maxLines="2" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+   </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Selector de hora estilizado en modo spinner -->
-    <TimePicker
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnElegirFecha"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Elegir fecha"
+            android:textSize="16sp"
+            app:cornerRadius="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#BB86FC"
+            app:strokeWidth="2dp"
+            android:textColor="#BB86FC"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvFechaSeleccionada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha: hoy"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Selector de hora estilizado en modo spinner -->
+        <TimePicker
         android:id="@+id/timePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

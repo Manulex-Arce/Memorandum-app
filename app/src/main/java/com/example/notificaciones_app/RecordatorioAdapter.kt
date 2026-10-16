@@ -24,9 +24,14 @@ class RecordatorioAdapter(private val listaRecordatorios: List<Recordatorio>) :
         val recordatorio = listaRecordatorios[position]
         holder.tvMensaje.text = recordatorio.mensaje
 
-        // Formatear la hora y minuto con ceros a la izquierda (ej: 08:05)
-        val horaFormateada = String.format("%02d:%02d", recordatorio.hora, recordatorio.minuto)
-        holder.tvHora.text = "Hora programada: $horaFormateada"
+        val fechaFormateada = String.format(
+        "%02d/%02d/%04d",
+        recordatorio.dia,
+        recordatorio.mes + 1,
+        recordatorio.anio
+    )
+    val horaFormateada = String.format("%02d:%02d", recordatorio.hora, recordatorio.minuto)
+    holder.tvHora.text = "Programado: $fechaFormateada $horaFormateada"
     }
 
     override fun getItemCount() = listaRecordatorios.size

@@ -5,6 +5,7 @@ color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 id btnElegirAudio
+id btnElegirFecha
 id btnElegirVideo
 id btnGuardar
 id btnPermisoOverlay
@@ -14,6 +15,7 @@ id btnVerHistorial
 id etMensaje
 id recyclerViewRecordatorios
 id timePicker
+id tvFechaSeleccionada
 id tvHoraItem
 id tvMensajeItem
 layout activity_historial
