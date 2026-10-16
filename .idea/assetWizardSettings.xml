@@ -80,7 +80,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\marce\Downloads\miguelin-convertido-de-webp.png" />
+                                                <entry key="imagePath" value="C:\Users\marce\Downloads\miguelmemoriandum.png" />
+                                                <entry key="scalingPercent" value="91" />
                                               </map>
                                             </option>
                                           </PersistentState>

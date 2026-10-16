@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_screen_nvidia"
+    android:fillViewport="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#121212"
     android:padding="24dp"
     android:gravity="center_horizontal">
 
@@ -12,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MemoriandumApp-V1.6"
+        android:text="MemoriandumApp-V1.7"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
@@ -28,8 +33,8 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
-        app:boxStrokeColor="#BB86FC"
-        app:hintTextColor="#BB86FC">
+        app:boxStrokeColor="@color/nvidia_green"
+        app:hintTextColor="@color/nvidia_green">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etMensaje"
@@ -48,11 +53,11 @@
             android:layout_height="56dp"
             android:text="Elegir fecha"
             android:textSize="16sp"
-            app:cornerRadius="16dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:strokeColor="#BB86FC"
-            app:strokeWidth="2dp"
-            android:textColor="#BB86FC"
+            android:textStyle="bold"
+            android:textColor="@color/nvidia_green"
+            android:background="@drawable/bg_glass_accent"
+            app:backgroundTint="@null"
+            app:elevation="0dp"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -81,9 +86,10 @@
         android:text="Guardar Recordatorio"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:cornerRadius="16dp"
-        app:backgroundTint="#BB86FC"
-        android:textColor="#121212"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_glass_primary"
+        app:backgroundTint="@null"
+        app:elevation="0dp"
         android:layout_marginBottom="12dp" />
 
     <!-- Botón Secundario: Ver Historial (Estilo Outline) -->
@@ -93,11 +99,11 @@
         android:layout_height="56dp"
         android:text="Ver Historial"
         android:textSize="16sp"
-        app:cornerRadius="16dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        app:strokeColor="#03DAC6"
-        app:strokeWidth="2dp"
-        android:textColor="#03DAC6"
+        android:textStyle="bold"
+        android:textColor="@color/nvidia_aqua"
+        android:background="@drawable/bg_glass_secondary"
+        app:backgroundTint="@null"
+        app:elevation="0dp"
         android:layout_marginBottom="12dp" />
 
     <LinearLayout
@@ -113,11 +119,11 @@
             android:layout_weight="1"
             android:text="Elegir video"
             android:textSize="14sp"
-            app:cornerRadius="16dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:strokeColor="#BB86FC"
-            app:strokeWidth="2dp"
-            android:textColor="#BB86FC"
+            android:textStyle="bold"
+            android:textColor="@color/nvidia_green"
+            android:background="@drawable/bg_glass_accent"
+            app:backgroundTint="@null"
+            app:elevation="0dp"
             android:layout_marginEnd="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -126,11 +132,10 @@
             android:layout_height="56dp"
             android:text="Quitar"
             android:textSize="14sp"
-            app:cornerRadius="16dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:strokeColor="#CF6679"
-            app:strokeWidth="2dp"
-            android:textColor="#CF6679"
+            android:textColor="@color/nvidia_silver"
+            android:background="@drawable/bg_glass_quit"
+            app:backgroundTint="@null"
+            app:elevation="0dp"
             android:enabled="false" />
     </LinearLayout>
 
@@ -147,11 +152,11 @@
             android:layout_weight="1"
             android:text="Elegir audio"
             android:textSize="14sp"
-            app:cornerRadius="16dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:strokeColor="#BB86FC"
-            app:strokeWidth="2dp"
-            android:textColor="#BB86FC"
+            android:textStyle="bold"
+            android:textColor="@color/nvidia_green"
+            android:background="@drawable/bg_glass_accent"
+            app:backgroundTint="@null"
+            app:elevation="0dp"
             android:layout_marginEnd="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -160,11 +165,10 @@
             android:layout_height="56dp"
             android:text="Quitar"
             android:textSize="14sp"
-            app:cornerRadius="16dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:strokeColor="#CF6679"
-            app:strokeWidth="2dp"
-            android:textColor="#CF6679"
+            android:textColor="@color/nvidia_silver"
+            android:background="@drawable/bg_glass_quit"
+            app:backgroundTint="@null"
+            app:elevation="0dp"
             android:enabled="false" />
     </LinearLayout>
 
@@ -174,10 +178,12 @@
         android:layout_height="56dp"
         android:text="Permiso ventana flotante"
         android:textSize="16sp"
-        app:cornerRadius="16dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        app:strokeColor="#03DAC6"
-        app:strokeWidth="2dp"
-        android:textColor="#03DAC6" />
+        android:textStyle="bold"
+        android:textColor="@color/nvidia_aqua"
+        android:background="@drawable/bg_glass_secondary"
+        app:backgroundTint="@null"
+        app:elevation="0dp" />
 
 </LinearLayout>
+
+</ScrollView>

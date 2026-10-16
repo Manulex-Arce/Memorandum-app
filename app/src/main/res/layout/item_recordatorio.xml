@@ -5,28 +5,28 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="6dp"
+    app:cardBackgroundColor="@color/nvidia_charcoal"
     app:cardCornerRadius="14dp"
     app:cardElevation="2dp"
-    app:strokeWidth="0dp">
+    app:strokeColor="@color/nvidia_green"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@android:color/white">
+        android:background="@color/nvidia_charcoal">
 
-        <!-- Mensaje principal del recordatorio -->
         <TextView
             android:id="@+id/tvMensajeItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mensaje del recordatorio"
-            android:textColor="#1A1A1A"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- Contenedor para la hora con un toque visual -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@android:drawable/ic_menu_recent_history"
-                app:tint="#666666" />
+                app:tint="@color/nvidia_green" />
 
             <TextView
                 android:id="@+id/tvHoraItem"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="00:00"
-                android:textColor="#666666"
+                android:textColor="@color/nvidia_silver"
                 android:textSize="13sp" />
 
         </LinearLayout>

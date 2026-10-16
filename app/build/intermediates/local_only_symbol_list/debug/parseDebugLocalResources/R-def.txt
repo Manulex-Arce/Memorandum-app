@@ -1,7 +1,17 @@
 R_DEF: Internal format may change without notice
 local
 color black
+color nvidia_aqua
+color nvidia_bg
+color nvidia_charcoal
+color nvidia_green
+color nvidia_silver
 color white
+drawable bg_glass_accent
+drawable bg_glass_primary
+drawable bg_glass_quit
+drawable bg_glass_secondary
+drawable bg_screen_nvidia
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 id btnElegirAudio

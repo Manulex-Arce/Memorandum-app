@@ -7,6 +7,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.Manifest
+import android.content.pm.PackageManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -14,6 +16,7 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.launch
@@ -38,6 +41,10 @@ class MainActivity : AppCompatActivity() {
     private var anioSeleccionado: Int = Calendar.getInstance().get(Calendar.YEAR)
     private var mesSeleccionado: Int = Calendar.getInstance().get(Calendar.MONTH)
     private var diaSeleccionado: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    private val notificationPermissionLauncher =
+    registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { /* si lo niega, la app sigue; el overlay se pide aparte */ }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -178,8 +185,9 @@ class MainActivity : AppCompatActivity() {
                     etMensaje.text.clear()
                 }
             }
-        }
-    }
+            }
+    solicitarPermisosSiFaltan()
+}
 
 
     private val videoPicker =
@@ -227,6 +235,42 @@ class MainActivity : AppCompatActivity() {
                     "Audio seleccionado",
                     Toast.LENGTH_SHORT
                 ).show()
+            }
+        }
+
+            override fun onResume() {
+            super.onResume()
+            // Por si el usuario vuelve de Ajustes tras conceder el overlay
+            // no volvemos a abrir Ajustes si ya está concedido.
+        }
+
+        private fun solicitarPermisosSiFaltan() {
+            // Notificaciones (Android 13+)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                val granted = ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+
+                if (!granted) {
+                    notificationPermissionLauncher.launch(
+                        Manifest.permission.POST_NOTIFICATIONS
+                    )
+                }
+            }
+
+            // Ventana flotante (solo si NO está activo)
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(
+                    this,
+                    "Activa el permiso de ventana flotante para las alarmas",
+                    Toast.LENGTH_LONG
+                ).show()
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                startActivity(intent)
             }
         }
 

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="nvidia_aqua">#41E7A8</color>
+    <color name="nvidia_bg">#000000</color>
+    <color name="nvidia_charcoal">#55565A</color>
+    <color name="nvidia_green">#76B900</color>
+    <color name="nvidia_silver">#AAAAAA</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">MemoriandumAPP</string>
     <style name="Base.Theme.Notificacionesapp" parent="Theme.Material3.DayNight.NoActionBar">
