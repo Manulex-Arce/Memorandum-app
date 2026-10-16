@@ -1,0 +1,3 @@
+com.example.notificaciones_app.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

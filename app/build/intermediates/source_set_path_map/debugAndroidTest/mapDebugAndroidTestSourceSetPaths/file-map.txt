@@ -1,0 +1,7 @@
+com.example.notificaciones_app.test.app-core-1.5.0-0 C:\Users\marce\.gradle\caches\8.13\transforms\2d9a3d1a2d57ddd82209fdf70decdeb2\transformed\core-1.5.0\res
+com.example.notificaciones_app.test.app-annotation-experimental-1.5.0-1 C:\Users\marce\.gradle\caches\8.13\transforms\70b4522d0e82c4d62403bb90cc6ae4c9\transformed\annotation-experimental-1.5.0\res
+com.example.notificaciones_app.test.app-androidTest-2 C:\Users\marce\AndroidStudioProjects\notificacionesapp\app\build\generated\res\resValues\androidTest\debug
+com.example.notificaciones_app.test.app-updated_navigation_xml-3 C:\Users\marce\AndroidStudioProjects\notificacionesapp\app\build\generated\updated_navigation_xml\debugAndroidTest
+com.example.notificaciones_app.test.app-mergeDebugAndroidTestResources-4 C:\Users\marce\AndroidStudioProjects\notificacionesapp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.notificaciones_app.test.app-mergeDebugAndroidTestResources-5 C:\Users\marce\AndroidStudioProjects\notificacionesapp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.notificaciones_app.test.app-debugAndroidTest-6 C:\Users\marce\AndroidStudioProjects\notificacionesapp\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

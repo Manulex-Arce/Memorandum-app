@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:padding="24dp"
+    android:gravity="center_horizontal">
+
+    <!-- Título principal -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MemoriandumApp-V1.3"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Campo de texto moderno con borde redondeado (TextInputLayout) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeColor="#BB86FC"
+        app:hintTextColor="#BB86FC">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMensaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="¿De qué quieres que te avise?"
+            android:textColor="@android:color/white"
+            android:inputType="textCapSentences"
+            android:maxLines="2" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Selector de hora estilizado en modo spinner -->
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón Principal: Guardar -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGuardar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Guardar Recordatorio"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="16dp"
+        app:backgroundTint="#BB86FC"
+        android:textColor="#121212"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Botón Secundario: Ver Historial (Estilo Outline) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnVerHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Ver Historial"
+        android:textSize="16sp"
+        app:cornerRadius="16dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:strokeColor="#03DAC6"
+        app:strokeWidth="2dp"
+        android:textColor="#03DAC6"
+        android:layout_marginBottom="12dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnElegirVideo"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:text="Elegir video"
+            android:textSize="14sp"
+            app:cornerRadius="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#BB86FC"
+            app:strokeWidth="2dp"
+            android:textColor="#BB86FC"
+            android:layout_marginEnd="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnQuitarVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="Quitar"
+            android:textSize="14sp"
+            app:cornerRadius="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#CF6679"
+            app:strokeWidth="2dp"
+            android:textColor="#CF6679"
+            android:enabled="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnElegirAudio"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:text="Elegir audio"
+            android:textSize="14sp"
+            app:cornerRadius="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#BB86FC"
+            app:strokeWidth="2dp"
+            android:textColor="#BB86FC"
+            android:layout_marginEnd="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnQuitarAudio"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="Quitar"
+            android:textSize="14sp"
+            app:cornerRadius="16dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#CF6679"
+            app:strokeWidth="2dp"
+            android:textColor="#CF6679"
+            android:enabled="false" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPermisoOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Permiso ventana flotante"
+        android:textSize="16sp"
+        app:cornerRadius="16dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:strokeColor="#03DAC6"
+        app:strokeWidth="2dp"
+        android:textColor="#03DAC6" />
+
+</LinearLayout>

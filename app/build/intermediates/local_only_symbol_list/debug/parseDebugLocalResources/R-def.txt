@@ -1,0 +1,29 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id btnElegirAudio
+id btnElegirVideo
+id btnGuardar
+id btnPermisoOverlay
+id btnQuitarAudio
+id btnQuitarVideo
+id btnVerHistorial
+id etMensaje
+id recyclerViewRecordatorios
+id timePicker
+id tvHoraItem
+id tvMensajeItem
+layout activity_historial
+layout activity_main
+layout item_recordatorio
+mipmap ic_launcher
+mipmap ic_launcher_foreground
+mipmap ic_launcher_round
+string app_name
+style Base.Theme.Notificacionesapp
+style Theme.Notificacionesapp
+xml backup_rules
+xml data_extraction_rules
